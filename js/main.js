@@ -1,76 +1,98 @@
-arrayDeCombos = [
-    {
-        nombre: "BigBurger",
-        precio: 7500,
-        descripcion: "Hamburguesa doble con queso mas bebida y papas",
-    },
-    {
-        nombre: "MegaBacon",
-        precio: 10000,
-        descripcion: "Hamburguesa doble con queso y bacon mas bebida y papas",
-    },
-    {
-        nombre: "ChesseeBurger",
-        precio: 11000,
-        descripcion: "Hamburguesa doble con queso extra mas bebida y papas",
-    },
-];
+const carrito = [];
 
-function modificarCombo() {
-    let comboModificar = prompt(`Seleccione el combo a modificar precio:
-        0. BigBurger
-        1. MegaBacon
-        2. ChesseeBurger`);
 
-    if(comboModificar = 0){
-        let precioactualizado = prompt("Ingrese el precio actualizado: ");
-        arrayDeCombos[0].precio = precioactualizado
-        prompt("El precio actual es: $"+ precioactualizado);
-    }else if(comboModificar = 1){
-        let precioactualizado = prompt("Ingrese el precio actualizado: ");
-        arrayDeCombos[1].precio = precioactualizado
-        prompt("El precio actual es: $"+ precioactualizado);
-    }else if(comboModificar = 2){
-        let precioactualizado = prompt("Ingrese el precio actualizado: ");
-        arrayDeCombos[2].precio = precioactualizado
-        prompt("El precio actual es: $"+ precioactualizado);
-    } else{
-        prompt("Opcion no valida. ❌")
+const productos = [
+    {
+        id: "Skyy Vodka Raspberry",
+        titulo: "Skyy Vodka Raspberry",
+        precio: 13000,
+        img: "./img/skyy.png",
+    },
+    {
+        id: "Don perignon",
+        titulo: "Don perignon",
+        precio: 43000,
+        img: "./img/donperi.png",
+    },
+    {
+        id: "Nuvo espumante",
+        titulo: "Nuvo espumante",
+        precio: 55000,
+        img: "./img/nuvo.png",
     }
+]
+
+const contenedorProductos = document.querySelector("#productos");
+const carritoVacio = document.querySelector("#carrito-vacio");
+const carritoProductos = document.querySelector("#carrito-productos");
+const carritoTotal = document.querySelector("#carrito-total");
+
+
+productos.forEach((producto) => {
+
+    let div = document.createElement("div");
+    div.classList.add("producto");
+    div.innerHTML = `
+        <img class="producto-img" src="${producto.img}" alt="">
+        <h3>${producto.titulo}</h3>
+        <p>$${producto.precio}</p>
+    `;
+
+    let button = document.createElement("button");
+    button.classList.add("producto-btn");
+    button.innerText = "Agregar al carrito";
+    button.addEventListener("click", () => {
+        agregarAlCarrito(producto);
+    })
+
+    div.append(button);
+    contenedorProductos.append(div);
+});
+
+
+const agregarAlCarrito = (producto) => {
+    carrito.push(producto);
+    actualizarCarrito();
 }
 
-function sumarCompra(){
+function actualizarCarrito() {
+    if (carrito.length === 0) {
+        carritoVacio.classList.remove("nada");
+        carritoProductos.classList.add("nada");
+    } else {
+        carritoVacio.classList.add("nada");
+        carritoProductos.classList.remove("nada");
 
-    alert("Elija la cantidad de combos que va a desear llevar! 🍔🍟")
-    let primercombo = parseInt(prompt("Ingrese la cantidad de combos Bigburger: "))
-    let segundocombo = parseInt(prompt("Ingrese la cantidad de combos MegaBacon: "))
-    let tercercombo = parseInt(prompt("Ingrese la cantidad de combos ChesseeBurger: "))
+        carritoProductos.innerHTML = "";
+        carrito.forEach((producto) => {
+            let div = document.createElement("div");
+            div.classList.add("carrito-producto");
+            div.innerHTML = `
+                <h3>${producto.titulo}</h3>
+                <p>$${producto.precio}</p>
+            `;
 
-    let primertotal = (arrayDeCombos[0].precio * primercombo)
-    let segundototal = (arrayDeCombos[1].precio * segundocombo)
-    let tercertotal = (arrayDeCombos[2].precio * tercercombo)
+            let button = document.createElement("button");
+            button.classList.add("carrito-producto-btn");
+            button.innerText = "✖️";
+            button.addEventListener("click", () => {
+                borrarDelCarrito(producto);
+            })
 
-    let total = (primertotal+segundototal+tercertotal)
-
-    alert("El total a pagar es : $"+ total)
+            div.append(button);
+            carritoProductos.append(div);
+        })
+    }
+    actualizarTotal();
 }
 
-alert("Bienvenido a BurgerCompany! 😀")
+function borrarDelCarrito(producto) {
+    const indice = carrito.findIndex((item) => item.id === producto.id);
+    carrito.splice(indice, 1);
+    actualizarCarrito();
+}
 
-let opcionElegida = parseInt(prompt(`Seleccione una opcion: 
-    1. Modificar precios
-    2. Comprar
-    3. Salir`));
-
-    if(opcionElegida === 1){
-        modificarCombo()
-    }
-    else if(opcionElegida === 2){
-        sumarCompra();
-    }else if(opcionElegida === 3){
-        alert("Nos vemos pronto!!! 🤞")
-    }
-    else{
-        alert("Opcion no valida. ❌")
-    }
-
+function actualizarTotal() {
+    const total = carrito.reduce((acc, prod) => acc + prod.precio, 0);
+    carritoTotal.innerText = "$" + total;
+}
