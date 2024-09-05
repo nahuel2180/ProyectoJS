@@ -1,0 +1,6 @@
+[
+    { "id":"01", "nombre":"Skyy", "precio":"13000", "descripcion":"El Vodka Skyy es un vodka norteamericano de 40,0 % alc./vol., obtenido por cuádruple destilación de trigo y filtrado tres veces. Este vodka presenta un aspecto muy brillante, límpido y cristalino con un un sabor suave de leve amargor. Vodka presentado en una botella estilizada color azul cobalto."},
+    { "id":"02", "nombre":"Don perignon", "precio":"43000", "descripcion":"Según cuenta la historia, el monje Dom Perignon se dedicaba a custodiar los sótanos de la Abadía, donde funcionaba la cava de vinos de la comunidad religiosa. Era una especie de bodeguero oficial, importante función tanto en aquellos tiempos como en los actuales."},
+    { "id":"03", "nombre":"Nuvo", "precio":"55000", "descripcion":"Nuvo es una mezcla de vodka francés premium triplemente destilado, infusionado con un espumante francés elaborado con chardonnay y Pinot Noir y un néctar natural de frutas."}
+
+]

@@ -169,3 +169,38 @@ h2{
 .nada {
     display: none;
 }
+
+#vaciar-carrito{
+
+    height: 100px;
+    width: 100px;
+    padding: 1px;
+    border-radius: 1rem;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background-color: beige;
+    cursor: pointer;
+    margin-left: 45%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#vaciar-carrito-img {
+    height: 100px;
+    width: 100px;
+    padding: 1px;
+    border-radius: 1rem;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background-color: beige;
+    cursor: pointer;
+    margin-left: 45%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#vaciar-carrito-img:hover{
+    border: solid hotpink;
+}
